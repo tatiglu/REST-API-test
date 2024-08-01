@@ -1,7 +1,14 @@
+
 <?php
+
 include 'db.php';
 
-function getUserInfo($id) {
+/**
+ * @param $id
+ * @return mixed|null
+ */
+function getUserInfo($id)
+{
     global $pdo;
 
     $stmt = $pdo->prepare("SELECT email, created_at FROM users WHERE id = :id");
@@ -16,7 +23,8 @@ function getUserInfo($id) {
     return $user;
 }
 
-function createUser($email, $password) {
+function createUser($email, $password)
+{
     global $pdo;
 
     if (empty($email) || empty($password)) {
@@ -47,7 +55,8 @@ function createUser($email, $password) {
     }
 }
 
-function loginUser($email, $password) {
+function loginUser($email, $password)
+{
     global $pdo;
 
     // существует ли пользователь с таким email
@@ -68,11 +77,12 @@ function loginUser($email, $password) {
 }
 
 /**
- * @param $oldEmail
- * @param $newEmail
+ * @param $oldEmail /старый email
+ * @param $newEmail /новый email
  * @return string
  */
-function updateUserEmail($oldEmail, $newEmail) {
+function updateUserEmail($oldEmail, $newEmail)
+{
     global $pdo;
 
     // Проверка, существует ли пользователь с таким oldEmail
@@ -114,12 +124,13 @@ function updateUserEmail($oldEmail, $newEmail) {
 
 /**
  * Функция смены пароля
- * @param $id
- * @param $oldPass
- * @param $newPass
+ * @param $id /ID пользователя
+ * @param $oldPass /старый пароль
+ * @param $newPass /новый пароль
  * @return string
  */
-function updateUserPass($id, $oldPass, $newPass) {
+function updateUserPass($id, $oldPass, $newPass)
+{
     global $pdo;
 
     $stmt = $pdo->prepare("SELECT password FROM users WHERE id = :id");
@@ -152,7 +163,8 @@ function updateUserPass($id, $oldPass, $newPass) {
     }
 }
 
-function deleteUser($id) {
+function deleteUser($id)
+{
     global $pdo;
 
     // Проверка, существует ли пользователь с таким ID
@@ -176,32 +188,4 @@ function deleteUser($id) {
     }
 }
 
-//$email = "example1@example.com";
-//$password = "password123";
-
-//тестируем создание пользователя
-//$result = createUser($_POST['email'], $_POST['password']);
-
-//тестируем удаление пользователя
-//$result = deleteUser($_POST['id']);
-
-//тестируем проверку информации о пользователе
-//$userInfo = getUserInfo($_POST['id']);
-//print_r($userInfo);
-
-//тестируем смену email
-//$oldEmail = "a1@h.ru";
-//$newEmail = "new@example.com";
-//$result = updateUserEmail($oldEmail, $newEmail);
-
-
-//тестируем смену пароля
-//$oldPass = "newpassword456";
-//$newPass = "asd123";
-//$result = updateUserPass($id, $oldPass, $newPass);
-
-
-// Пример вызова функции loginUser
-//$result = loginUser($email, $password);
-
-//echo $result;
+ 

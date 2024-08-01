@@ -1,6 +1,8 @@
+
 <?php
+
 require 'db.php';
-require 'index.php';
+require 'function.php';
 
 header('Content-Type: application/json');
 
@@ -8,7 +10,7 @@ $request_method = $_SERVER['REQUEST_METHOD'];
 
 $response = [];
 
-switch($request_method) {
+switch ($request_method) {
     case 'GET':
         $response['status'] = 'ok';
         $response['response'] = getUserInfo($_GET['id']);
@@ -58,4 +60,3 @@ switch($request_method) {
 }
 echo json_encode($response);
 
-//print_r($request_method);
